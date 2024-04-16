@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { contactsInitialState } from "./constants";
-import { fetchContacts, addContact, deleteContact } from './contactsOps';
+import { contactsInitialState } from "./constants.js";
+import { fetchContacts, addContact, deleteContact } from './operations.js';
+import {resetState} from "../../utils/utils.js";
 
 const handlePending = state => {
   state.loading = true;
@@ -12,12 +13,13 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
-const contactsSlice = createSlice({
+const slice = createSlice({
   name: 'contacts',
   initialState: contactsInitialState,
   extraReducers: builder => {
     builder
-
+      // Reset state
+      .addCase(resetState, () => contactsInitialState)
       // get all
       .addCase(fetchContacts.pending, handlePending)
       .addCase(fetchContacts.fulfilled, (state, action) => {
@@ -45,4 +47,4 @@ const contactsSlice = createSlice({
   },
 });
 
-export const contactsReducer = contactsSlice.reducer;
+export const contactsReducer = slice.reducer;

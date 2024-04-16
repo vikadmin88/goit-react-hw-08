@@ -1,12 +1,9 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectError, selectLoading } from '../redux/selectors'
-import { fetchContacts } from '../redux/contactsOps'
-import ContactForm from './ContactForm/ContactForm'
-import SearchBox from './SearchBox/SearchBox'
-import ContactList from './ContactList/ContactList'
+import { selectError, selectLoading } from '../redux/contacts/selectors.js'
 import Loader from './Loader/Loader'
-import css from './App.module.css'
+import Layout from "./Layout/Layout.jsx";
+import {apiRefresh} from "../redux/auth/operations.js";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -14,16 +11,13 @@ const App = () => {
   const error = useSelector(selectError);
 
   useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    dispatch(apiRefresh());
 
+  }, [dispatch]);
 
   return (
     <>
-      <h1 className={css.title}>Phonebook</h1>
-      <ContactForm />
-      <SearchBox />
-      <ContactList />
+      <Layout/>
       {!error && loading && <Loader />}
     </>
   )

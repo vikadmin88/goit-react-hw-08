@@ -4,7 +4,4 @@ export const contactsInitialState = {
   error: null
 };
 
-export const filterInitialState = {
-    name: '',
-};
 

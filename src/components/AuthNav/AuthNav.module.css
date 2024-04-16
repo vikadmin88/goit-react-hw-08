@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+.btn {
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    color: rgb(31, 27, 27);
+    padding: 4px;
+    background-color: #D3D3D3FF;
+}
+
+.btn:nth-child(1) {
+    margin-right: 12px;
+}
