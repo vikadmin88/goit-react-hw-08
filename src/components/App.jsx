@@ -1,14 +1,13 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectError, selectLoading } from '../redux/contacts/selectors.js'
 import Loader from './Loader/Loader'
-import Layout from "./Layout/Layout.jsx";
 import {apiRefresh} from "../redux/auth/operations.js";
+import RoutesChain from "./RoutesChain/RoutesChain.jsx";
+import {selectIsRefreshing} from "../redux/auth/selectors.js";
 
 const App = () => {
   const dispatch = useDispatch();
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
     dispatch(apiRefresh());
@@ -17,8 +16,7 @@ const App = () => {
 
   return (
     <>
-      <Layout/>
-      {!error && loading && <Loader />}
+      {isRefreshing ? <Loader /> : <RoutesChain/>}
     </>
   )
 }
